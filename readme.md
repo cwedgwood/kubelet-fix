@@ -27,3 +27,15 @@ cp ../kubernetes/_output/dockerized/bin/linux/amd64/kubelet ./
 docker build -t port/kubelet:1.16-patched .
 docker push port/kubelet:1.16-patched
 ```
+
+
+5) as promenade wants to use the hyperkube image, this was also produced:
+```
+build/run.sh make kube-apiserver kube-controller-manager kube-proxy kube-scheduler kubectl kubelet hyperkube
+cd cluster/images/hyperkube
+export REGISTRY=docker.io/port
+make build VERSION=v1.16.4 ARCH=amd64
+make push VERSION=v1.16.4 ARCH=amd64
+```
+
+which produced, and published the `docker.io/port/hyperkube:v1.16.4` image
